@@ -181,7 +181,7 @@ export class Tasks extends React.PureComponent<TasksProps, TasksState> {
     return (
       <Grid.Row>
         <Loader indeterminate active inline="centered">
-          Loading TASKs
+          Loading TASKS
         </Loader>
       </Grid.Row>
     )
