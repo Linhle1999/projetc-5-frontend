@@ -1,19 +1,18 @@
-services:
-  - docker
-
-# Pre-testing installs
+language: node_js
+node_js:
+  - '14'
+  - node
 install:
-  - echo "nothing needs to be installed"
-
-# Scripts to be run such as tests
-before_script:
-  - echo "no tests"
-
+- npm install
 script:
-  - docker --version # print the version for logging
-  - docker build -t todoapp-frontend .
-  - docker tag todoapp-frontend "$DOCKER_USERNAME"/todoapp-frontend:latest
-
-after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/todoapp-frontend
+- CI=false npm run build
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_ID
+  secret_access_key: $AWS_SECRET_ID
+  bucket: 'project-5-fe'
+  local_dir: build
+  region: us-east-1
+  skip_cleanup: true
+  on:
+    branch: master
