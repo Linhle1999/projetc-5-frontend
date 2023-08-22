@@ -134,7 +134,7 @@ export class Tasks extends React.PureComponent<TasksProps, TasksState> {
         }}
       >
         <div>
-          <Header as="h1">TASKs</Header>
+          <Header as="h1">List TASK</Header>
 
           {this.renderCreateTaskInput()}
 
