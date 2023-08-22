@@ -1,5 +1,7 @@
 language: node_js
-node_js: "stable"
+node_js:
+  - 'v14.16.0'
+  - node
 install:
 - npm install
 script:
@@ -11,6 +13,6 @@ deploy:
   bucket: 'project-5-fe'
   local_dir: build
   region: us-east-1
-  skip_cleanup: true
+  skip_cleanup: false
   on:
     branch: master
