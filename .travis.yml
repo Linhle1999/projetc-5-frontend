@@ -1,19 +1,19 @@
-services:
-  - docker
+language: node_js
+node_js:
+  - stable
 
-# Pre-testing installs
 install:
-  - echo "nothing needs to be installed"
-
-# Scripts to be run such as tests
-before_script:
-  - echo "no tests"
+  - npm install
 
 script:
-  - docker --version # print the version for logging
-  - docker build -t todoapp-frontend .
-  - docker tag todoapp-frontend "$DOCKER_USERNAME"/todoapp-frontend:latest
+  - npm run build
 
-after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/todoapp-frontend
+deploy:
+  provider: s3
+  access_key_id: YOUR_ACCESS_KEY
+  secret_access_key: YOUR_SECRET_KEY
+  bucket: YOUR_S3_BUCKET_NAME
+  local_dir: build # Path to your built React app
+  skip_cleanup: true
+  on:
+    branch: main # Or the branch you want to trigger deployment from
