@@ -15,4 +15,3 @@ deploy:
   region: us-east-1
   on:
     branch: master
-  endpoint: project-5-fe.s3-website-us-east-1.amazonaws.com
